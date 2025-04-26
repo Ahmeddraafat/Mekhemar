@@ -12,6 +12,7 @@ class AuthController extends ChangeNotifier {
     required String password,
   }) async {
     try {
+
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
         email: identifier,
         password: password,
