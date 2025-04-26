@@ -5,23 +5,25 @@ class CustomTextField extends StatelessWidget {
   final String label;
   final bool obscureText;
   final String? Function(String?)? validator;
+  final FocusNode? focus;
 
   const CustomTextField({
     super.key,
     required this.controller,
     required this.label,
     this.obscureText = false,
-    this.validator,
+    this.validator, this.focus,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      focusNode: focus,
+      onTapOutside: (event) => focus?.unfocus(),
       obscureText: obscureText,
       decoration: InputDecoration(
         labelText: label,
-        border: const OutlineInputBorder(),
       ),
       validator: validator,
     );
@@ -41,8 +43,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
+        child: ElevatedButton(
         onPressed: onPressed,
         child: Text(text),
       ),
@@ -59,6 +60,8 @@ class LogoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       'assets/images/logo.png',
+      color: Theme.of(context).colorScheme.primary,
+      colorBlendMode: BlendMode.lighten,
       width: size,
       height: size,
     );

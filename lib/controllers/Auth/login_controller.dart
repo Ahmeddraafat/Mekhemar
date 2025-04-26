@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'auth_controller.dart';
 
 class LoginController extends ChangeNotifier {
+  bool rememberMe = false;
   final AuthController authController;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  bool rememberMe = false;
+  final FocusNode emailFocus = FocusNode();
+  final FocusNode passwordFocus = FocusNode();
 
   LoginController(this.authController);
 
@@ -24,6 +26,7 @@ class LoginController extends ChangeNotifier {
       authController.login(
         identifier: emailController.text,
         password: passwordController.text,
+        rememberMe: rememberMe,
       );
     }
   }
